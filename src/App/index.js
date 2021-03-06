@@ -13,7 +13,10 @@ function App() {
     <AuthProvider>
       <Layout>
         <Switch>
-          <PrivateRoutes exact path="/" component={Landing} />
+          {/* <PrivateRoutes exact path="/" component={Landing} /> */}
+          <Route exact path="/">
+            <Landing />
+          </Route>
           <LoggedOutRoutes restricted path="/login" component={Login} />
           <LoggedOutRoutes restricted path="/register" component={Register} />
           <Route>
