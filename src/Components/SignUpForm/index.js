@@ -35,7 +35,7 @@ export default function SignUp() {
       try {
         const {
           data,
-        } = await Axios.post("https://auth-v1.herokuapp.com/api/v1/login", {
+        } = await Axios.post("https://auth-v1.herokuapp.com/api/v1/signup", {
           username,
           mobile,
           confirmPassword,
