@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+import Axios from "axios";
 import Input from "../InputFeild";
 import Button from "../Button";
+import axios from "axios";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -12,17 +14,21 @@ export default function Login() {
     setPassword("");
   };
 
-  const handelSubmit = () => {
+  const handelSubmit = async () => {
     if (!email.trim() || !password.trim()) {
       alert("error , you have empty value");
     } else {
-      //axios register
+      try {
+        const { data } = await Axios.post('https://auth-v1.herokuapp.com/api/v1/login',{ email, password });
+        console.log(data);
+      }catch(e){
+          console.log(e.response)
+      }
     }
   };
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-
       <Input
         type="email"
         inputName="email"

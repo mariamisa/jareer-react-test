@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Axios from "axios";
+
 import Input from "../InputFeild";
 import Button from "../Button";
 
@@ -18,7 +20,7 @@ export default function SignUp() {
     setConfirmPassword("");
   };
 
-  const handelSubmit = () => {
+  const handelSubmit = async () => {
     if (
       !email.trim() ||
       !password.trim() ||
@@ -30,7 +32,20 @@ export default function SignUp() {
     } else if (password !== confirmPassword) {
       alert("password and confirmed password doesn't match");
     } else {
-      //axios register
+      try {
+        const {
+          data,
+        } = await Axios.post("https://auth-v1.herokuapp.com/api/v1/login", {
+          username,
+          mobile,
+          confirmPassword,
+          email,
+          password,
+        });
+        console.log(data);
+      } catch (e) {
+        console.log(e.response);
+      }
     }
   };
 

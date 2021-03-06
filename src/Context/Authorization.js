@@ -14,7 +14,7 @@ function AuthProvider({ children }) {
     (async () => {
       try {
         setError(null);
-        await Axios('/api/v1/is-auth');
+        await Axios('https://auth-v1.herokuapp.com/api/v1/is-auth');
         if (isCurrent) {
           setIsAuth(true);
           setAuthLoading(false);
