@@ -41,7 +41,8 @@ export default function SignUp() {
           confirmPassword,
           email,
           password,
-        });
+        },{headers: {"Access-Control-Allow-Origin": "*"}}
+        );
         console.log(data);
       } catch (e) {
         console.log(e.response);

@@ -4,8 +4,8 @@ import { Redirect, Route } from 'react-router-dom';
 import { AuthContext } from '../../Context/Authorization';
 
 function LoggedOutRoutes({ component: Component, restricted, ...rest }) {
-  const { isAuth, authLoading } = useContext(AuthContext);
-  if (!isAuth && restricted && !authLoading) {
+  const { isLoggedIn, authLoading } = useContext(AuthContext);
+  if (!isLoggedIn && restricted && !authLoading) {
     return (
       <Route {...rest}>
         <Component />

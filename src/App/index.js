@@ -6,17 +6,17 @@ import AuthProvider from "../Context/Authorization";
 
 import { Login, Register, Landing, Layout } from "../Pages";
 
-import { PrivateRoutes, LoggedOutRoutes } from "./Routes";
+import {  LoggedOutRoutes,PrivateRoutes } from "./Routes";
 
 function App() {
   return (
     <AuthProvider>
       <Layout>
         <Switch>
-          {/* <PrivateRoutes exact path="/" component={Landing} /> */}
-          <Route exact path="/">
+          <PrivateRoutes exact path="/" component={Landing} />
+          {/* <Route exact path="/">
             <Landing />
-          </Route>
+          </Route> */}
           <LoggedOutRoutes restricted path="/login" component={Login} />
           <LoggedOutRoutes restricted path="/register" component={Register} />
           <Route>

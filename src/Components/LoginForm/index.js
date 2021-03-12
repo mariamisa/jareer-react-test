@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import Axios from "axios";
+// import Axios from "axios";
 import Input from "../InputFeild";
 import Button from "../Button";
-import axios from "axios";
+import db from "../../firebase/config";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,10 +19,18 @@ export default function Login() {
       alert("error , you have empty value");
     } else {
       try {
-        const { data } = await Axios.post('https://auth-v1.herokuapp.com/api/v1/login',{ email, password });
-        console.log(data);
-      }catch(e){
-          console.log(e.response)
+        // await Axios.post(
+        //   "https://auth-v1.herokuapp.com/api/v1/login",
+        //   { email, password },
+        //   { headers: { "Access-Control-Allow-Origin": "*" } }
+        // );
+        db.auth().signInWithEmailAndPassword(email, password)
+    .catch((error) => {
+      console.error('Incorrect username or password');
+    });
+        console.log(111111111)
+      } catch (e) {
+        console.log(e.response,1111111111);
       }
     }
   };
