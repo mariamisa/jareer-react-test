@@ -11,6 +11,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
 
   const clearData = () => {
     setEmail("");
@@ -33,19 +34,16 @@ export default function SignUp() {
       alert("password and confirmed password doesn't match");
     } else {
       try {
-        const {
-          data,
-        } = await Axios.post("https://auth-v1.herokuapp.com/api/v1/signup", {
+        await Axios.post("https://auth-v1.herokuapp.com/api/v1/signup", {
           username,
           mobile,
           confirmPassword,
           email,
           password,
-        },{headers: {"Access-Control-Allow-Origin": "*"}}
-        );
-        console.log(data);
+        });
+        alert("sign up successfully");
       } catch (e) {
-        console.log(e.response);
+        setError(e.response.data.message);
       }
     }
   };
@@ -93,6 +91,7 @@ export default function SignUp() {
       <Button btnName="reset" type="reset" handelClick={clearData}>
         reset
       </Button>
+      {error&& <div style={{color:'red'}}>{error}</div>}
     </form>
   );
 }

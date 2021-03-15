@@ -7,7 +7,6 @@ import db from '../firebase/config'
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-  const [isAuth, setIsAuth] = useState(false);
   const [error, setError] = useState();
   const [authLoading, setAuthLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,7 +24,7 @@ function AuthProvider({ children }) {
           headers: {"Access-Control-Allow-Origin": "*"}
         });
         if (isCurrent) {
-          setIsAuth(true);
+          setIsLoggedIn(true);
           setAuthLoading(false);
         }
       } catch (err) {
@@ -33,16 +32,16 @@ function AuthProvider({ children }) {
         setError(
           err.response ? err.response.data.message : "internal server error"
         );
-        setIsAuth(false);
+        setIsLoggedIn(false);
       }
     })();
     return () => {
       isCurrent = false;
     };
-  }, [isAuth]);
+  }, [isLoggedIn]);
 
   return (
-    <AuthContext.Provider value={{ setIsAuth, isAuth, authLoading, error,isLoggedIn }}>
+    <AuthContext.Provider value={{ setIsLoggedIn, authLoading, error,isLoggedIn }}>
       {children}
     </AuthContext.Provider>
   );
