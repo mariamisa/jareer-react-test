@@ -37,6 +37,7 @@ export default function SignUp() {
       alert("password and confirmed password doesn't match");
     } else {
       try {
+        setError("");
         await Axios.post("https://auth-v1.herokuapp.com/api/v1/signup", {
           username,
           mobile,
