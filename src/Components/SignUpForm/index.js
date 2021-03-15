@@ -1,13 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 
 import Axios from "axios";
 
 import Input from "../InputFeild";
 import Button from "../Button";
-import { AuthContext } from "../../Context/Authorization";
 
 export default function SignUp() {
-  const { setIsLoggedIn } = useContext(AuthContext);
 
   const [username, setUsername] = useState("");
   const [mobile, setMobile] = useState("");
@@ -45,7 +43,7 @@ export default function SignUp() {
           email,
           password,
         });
-        setIsLoggedIn(true);
+        alert("signup successfully");
       } catch (e) {
         setError(e.response.data.message);
       }
